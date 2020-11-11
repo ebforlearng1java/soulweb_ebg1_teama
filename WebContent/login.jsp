@@ -118,7 +118,7 @@ if (request.getAttribute("PASSWORD") == null) {
 	<span>P W ：</span>
 	<input id="password" name="PASSWORD" type="password" size="21" value="<%=request.getAttribute("PASSWORD")%>" />
 	<br>
-	<input id="eBtn" name="EBTN" type="hidden" value="<%=request.getAttribute("EBTN")%>" />
+	<input id="eBtn" name="EBTN" type="hidden" value="<%=request.getParameter("EBTN")%>" />
 
 	<button type="button" onclick="submitLogic(1)">ログイン</button>
     <button type="button" onclick="submitLogic(2)">新規登録</button>

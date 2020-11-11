@@ -13,10 +13,11 @@ public class DBConnection {
 	static Statement statement = null;
 
 	// DB接続メソッド
-	public static Statement getDBConnection() throws SQLException {
+	public static Statement getDBConnection() throws SQLException, ClassNotFoundException {
 
 
         try {
+        	Class.forName("org.postgresql.Driver");
         	//-----------------
             // 接続
             //-----------------

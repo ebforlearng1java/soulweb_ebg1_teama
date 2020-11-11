@@ -40,6 +40,9 @@ public class Login extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
 
 			// ユーザ有無の判断
@@ -62,7 +65,7 @@ public class Login extends HttpServlet {
 
 	}
 
-	public String loginLogic(String user, String pw) throws SQLException {
+	public String loginLogic(String user, String pw) throws SQLException, ClassNotFoundException {
 
 		// 戻り値 "1" ユーザ登録済み
 		//        "2" ユーザ存在しない
