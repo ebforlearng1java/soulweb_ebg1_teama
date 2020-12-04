@@ -13,6 +13,20 @@ public class FindAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<ShowInfo> userlist;
 
+	private String soul_userid;
+
+	public String pay() throws Exception {
+		Map<String, Object> session = ActionContext.getContext().getSession();
+				 if(session.get("userid")==null){
+				 this.addFieldError("errorUser","ログインセッションが切れました。再ログインしてください。");
+					return "logout";
+				}
+
+		Userdao userdao = new Userdao();
+		userdao.payuser(session.get("userid_1").toString(),soul_userid);
+
+		return search();
+	}
 	public String search() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 				 if(session.get("userid")==null){
@@ -28,6 +42,12 @@ public class FindAction extends ActionSupport {
 		return "search";
 	}
 
+	public String getSoul_userid() {
+		return soul_userid;
+	}
+	public void setSoul_userid(String soul_userid) {
+		this.soul_userid = soul_userid;
+	}
 	public List<ShowInfo> getUserlist() {
 		return userlist;
 	}

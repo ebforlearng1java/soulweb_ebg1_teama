@@ -131,10 +131,24 @@ public class Userdao {
 		return null;
 	}
 
+	public void payuser(String id, String targetid) throws SQLException {
+		conn = Dbcon.getConnection();
+
+		String sql = "insert into paystatus (key,soul_userid,soul_target_userid) VALUES (?,?,?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, id+targetid);
+		stmt.setInt(2, Integer.parseInt(id));
+		stmt.setInt(3, Integer.parseInt(targetid));
+		stmt.executeUpdate();
+		Dbcon.closeConn(conn, stmt, null);
+
+	}
+
 	public List<ShowInfo> finduser(String id) throws SQLException {
 		List<ShowInfo> userlist = new ArrayList<ShowInfo>();
 		conn = Dbcon.getConnection();
 		String sql = "select * from soul_user where soul_userid='" + id + "'";
+		String sqlpay = "select * from paystatus where soul_userid='" + id + "'";
 		String sqlAll = "select * from soul_user";
 		stmt = conn.prepareStatement(sql);
 		rs = stmt.executeQuery();
@@ -176,8 +190,28 @@ public class Userdao {
 
 					if (msg.size() > 0) {
 						ShowInfo us = new ShowInfo();
+						PreparedStatement stmtpay = conn.prepareStatement(sqlpay);
+						ResultSet rspay = stmtpay.executeQuery();
+						while (rspay.next()) {
+							if (rs.getString("soul_userid").equals(rspay.getString("soul_target_userid"))) {
+								String sql2 = "select * from soul_login where soul_userid='"
+										+ rs.getString("soul_userid") + "'";
+								PreparedStatement stmt2 = conn.prepareStatement(sql2);
+								ResultSet rs2 = stmt2.executeQuery();
+								rs2.next();
+								us.setPayText(rs2.getString("soul_login_mail"));
+								stmt2.close();
+								rs2.close();
+								break;
+							}
+						}
+						stmtpay.close();
+						rspay.close();
 						us.setSoul_name(rs.getString("soul_name"));
-						us.setPayText(msg.toString());
+						us.setSoul_userid(rs.getInt("soul_userid"));
+						if (us.getPayText() == null) {
+							us.setPayText(msg.toString());
+						}
 						userlist.add(us);
 					}
 				}

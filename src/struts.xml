@@ -35,5 +35,9 @@
 			<result name="false">/modify.jsp</result>
 		</action>
 
+		<action name="pay" class="action.FindAction" method="pay">
+			<result name="search">/show.jsp</result>
+			<result name="logout">/login.jsp</result>
+		</action>
 	</package>
 </struts>
