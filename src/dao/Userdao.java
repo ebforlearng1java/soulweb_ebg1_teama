@@ -40,8 +40,8 @@ public class Userdao {
 		String hobby = user.getHobby_1() + "," + user.getHobby_2() + "," +
 				user.getHobby_3() + "," + user.getHobby_4() + ","
 				+ user.getHobby_5() + "," + user.getHobby_6();
-		hobby.replaceAll("null,", "");
-		hobby.replaceAll(",null", "");
+		String hobbytmp=hobby.replace("null,", "");
+		hobby=hobbytmp.replace(",null", "");
 		conn = Dbcon.getConnection();
 
 		String get_last = "select * from soul_login order by soul_userid DESC limit 1";
@@ -87,8 +87,8 @@ public class Userdao {
 		String hobby = user.getHobby_1() + "," + user.getHobby_2() + "," + user.getHobby_3() + "," + user.getHobby_4()
 				+ ","
 				+ user.getHobby_5() + "," + user.getHobby_6();
-		hobby.replaceAll("null,", "");
-		hobby.replaceAll(",null", "");
+		String hobbytmp=hobby.replace("null,", "");
+		hobby=hobbytmp.replace(",null", "");
 		conn = Dbcon.getConnection();
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		soul_id = (int) session.get("userid_1");
@@ -134,8 +134,8 @@ public class Userdao {
 	public void payuser(String id, String targetid) throws SQLException {
 		conn = Dbcon.getConnection();
 
-		String sql = "insert into paystatus (key,soul_userid,soul_target_userid) VALUES (?,?,?)";
-		PreparedStatement stmt = conn.prepareStatement(sql);
+		String sql = "insert into paystatus (soul_key,soul_userid,soul_target_userid) VALUES (?,?,?)";
+		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, id+targetid);
 		stmt.setInt(2, Integer.parseInt(id));
 		stmt.setInt(3, Integer.parseInt(targetid));

@@ -82,7 +82,7 @@
 			<s:param>errorUser</s:param>
 		</s:fielderror>
 
-		<span>E-mail　：</span>
+		<span>E-mail　 ：</span>
 		<s:textfield name="soul_login_mail" size="20" />
 		<br />
 		<br />
