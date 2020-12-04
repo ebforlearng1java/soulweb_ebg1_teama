@@ -159,7 +159,7 @@ public class Userdao {
 		try {
 			if (rs.next()) {
 				city = rs.getString("city");
-				birthday = rs.getString("birthday");
+				birthday = rs.getString("birthday").substring(0,4);
 				star = rs.getString("star");
 				hobbylist = rs.getString("hobby").split(",");
 			} else {
@@ -176,8 +176,8 @@ public class Userdao {
 					if (city.equals(rs.getString("city"))) {
 						msg.add("同場所");
 					}
-					if (birthday.equals(rs.getString("birthday"))) {
-						msg.add("同生年月日");
+					if (birthday.equals(rs.getString("birthday").substring(0,4))) {
+						msg.add("同年齢");
 					}
 					if (star.equals(rs.getString("star"))) {
 						msg.add("同星座");
