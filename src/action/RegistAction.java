@@ -21,4 +21,12 @@ public class RegistAction extends ActionSupport {
 		return "success";
 	}
 
+	public UserInfo getUser() {
+		return user;
+	}
+
+	public void setUser(UserInfo user) {
+		this.user = user;
+	}
+
 }

@@ -15,10 +15,10 @@ public class FindAction extends ActionSupport {
 
 	public String search() throws Exception {
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		//		 if(session.get("userid")==null){
-		//		 this.addFieldError("errorUser","ログインセッションが切れました。再ログインしてください。");
-		//			return "logout";
-		//		}
+				 if(session.get("userid")==null){
+				 this.addFieldError("errorUser","ログインセッションが切れました。再ログインしてください。");
+					return "logout";
+				}
 
 		Userdao userdao = new Userdao();
 		this.userlist = userdao.finduser(session.get("userid_1").toString());
