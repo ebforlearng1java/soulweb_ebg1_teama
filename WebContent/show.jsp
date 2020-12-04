@@ -6,14 +6,16 @@
 <head>
 <!--<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>FindUser</title>
+<title>検索結果</title>
+
 </head>
 
 
 <body>
-	<s:fielderror cssStyle="color:blue">
-		<s:param>result</s:param>
-	</s:fielderror>
+
+	<s:form action="pay" name="payform" method="post" theme="simple">
+
+
 	<br />
 
 	<s:if test="userlist!=null && !userlist.isEmpty()">
@@ -30,11 +32,13 @@
 					<tr>
 						<td><s:property value="soul_name" /></td>
 						<td><s:property value="payText" /></td>
-						<td><button type="button">Pay</button></td>
+						<td><s:a action="pay.action">pay<s:param name="soul_userid" value="soul_userid"></s:param></s:a></td>
 					</tr>
 				</s:iterator>
 			</tbody>
 		</table>
 	</s:if>
+
+		</s:form>
 </body>
 </html>
