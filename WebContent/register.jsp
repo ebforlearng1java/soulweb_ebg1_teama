@@ -8,6 +8,34 @@
 <title>UserInfo</title>
 
 <script type="text/javascript">
+	function checkid() {
+		var id = document.getElementsByName("user.soul_login_mail")[0].value;
+
+		var xhr;
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();//其他非ie浏览器支持
+		} else if (window.ActiveXObject) {
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");//微软的ie浏览器支持，不支持老版本ie
+		}
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var data = xhr.responseText;
+				if (data == "1") {
+					document.getElementById("idcheck").innerHTML = "<font color='red'>E-mailはすでに使用されています</font>";
+				} else {
+					document.getElementById("idcheck").innerHTML = "<font color='green'>メールアドレスを利用できます</font>";
+				}
+			}
+		}
+
+		xhr.open("get", "regist!checkid.action?user.soul_login_mail=" + id,
+				true);
+		xhr.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded");
+		xhr.send();
+	}
+
 	function check_form(form1) {
 		if (form1['user.soul_pw'].value == "") {
 			alert("パスワードを入れてください");
@@ -240,8 +268,9 @@
 
 				<tr>
 					<td><font color="#FF0000">*</font>Soul Mail：</td>
-					<td><input type="text" name="user.soul_login_mail"></td>
+					<td><input type="text" name="user.soul_login_mail" onblur="checkid()"></br><span id="idcheck"></span></td>
 				</tr>
+
 				<tr>
 					<td><font color="#FF0000">*</font>Soul PW：</td>
 					<td><input type="password" name="user.soul_pw"></td>
