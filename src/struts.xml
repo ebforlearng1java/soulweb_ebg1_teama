@@ -20,7 +20,7 @@
 		</action>
 
 		<action name="regist" class="action.RegistAction">
-			<result name="success">/regsuc.jsp</result>
+			<result name="success">/login.jsp</result>
 			<result name="false">/register.jsp</result>
 		</action>
 
